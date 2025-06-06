@@ -1,0 +1,13 @@
+{
+  "name": "adsmanager-webhook",
+  "version": "1.0.0",
+  "description": "Meta webhook server for AdsMaster",
+  "main": "test-server.js",
+  "scripts": {
+    "start": "node test-server.js",
+    "build": "echo 'No build step required'"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+} 

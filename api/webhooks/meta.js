@@ -4,13 +4,15 @@
 const VERIFY_TOKEN = 'adsmaster_webhook_2025_secure_token_xyz789';
 
 export default function handler(req, res) {
-  console.log('Webhook received:', req.method, req.query, req.body);
+  console.log('Webhook received:', req.method, req.query);
   
   if (req.method === 'GET') {
     // Webhook verification
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
+
+    console.log('Verification:', { mode, token, challenge });
 
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
       console.log('Webhook verified successfully');
@@ -23,11 +25,13 @@ export default function handler(req, res) {
     // Handle webhook events
     const body = req.body;
     
+    console.log('Webhook event:', req.body);
+    
     // Process different event types
     if (body.object === 'page') {
       body.entry?.forEach((entry) => {
         entry.changes?.forEach((change) => {
-          console.log('Received webhook event:', change.field, change.value);
+          console.log('Processing webhook event:', change.field, change.value);
           
           // Handle different field types
           switch (change.field) {
